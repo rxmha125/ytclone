@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-900 w-full min-h-screen text-white p-10">
+    <div class="flex justify-between w-full mb-5">
+        <a href="/home" class="text-blue-500">Back to Home</a>
+        <a class="rounded-md bg-red-500 px-3 py-2 text-sm inline-block" href="/logout" onclick="return confirm('Are you sure you want to log out?')">Logout</a>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row items-center mb-10 gap-3">
+        <div class="w-24 h-24 sm:w-32 sm:h-32 rounded-full overflow-hidden">
+            <img class="w-full h-full object-cover" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK0AAACUCAMAAADWBFkUAAAAMFBMVEXh4eGjo6OgoKDk5OTe3t6np6e0tLTW1tbPz8+8vLyvr6/b29u5ubnExMTn5+fIyMhmy0gcAAAD/klEQVR4nO2c23LrKgxAAXG/mP//2w1O2pPdJjHyBoucYb3U7fRhjUbGCASMLRaLxWKxWFwEbBvIEIKsD9QybwGQJkfFb6iYjYRpjaVJngvBvyiPPhlJrfUUMFE9qH4Jq2jmCy9I/Uv1S1jLuXyBZfXcdfdVmU3kCyy+VL0R59EF6V8H9h5eP002mEPZqmuoNXcaIjtTdHWLbNHV1KIFcG2yRdfRB9eqY887ylLLsqakvQfXE7tuqV226KaN1Fa258GeC6RTHMiY0JbgZsoXTXqULOeeMLhgkbKcW8Lgot6xikh0srLxM/Zgq+lSweBGhIqim9zg07YkLpktcvyqiEwlC+iXrL5mVIPC1jz9erB1VB9fiCdsI1VsP8v2wzLho96yzxrBPuzrEE58eQOZ7WfNavCvGeFLVmbj2FRQlLPxj6p0SnCRVSRlaAvICp3UFVmi0xborGYuZmWJfH8HUZsR1mTfNI+5lNX5fzTOckWkFr3RuJJPrXknNEwXhKabzvzgeHZDOZv5BST+zldwwsnME8C+SV7hqb8KP4HgXoRXcBcmk2WvfOd0ZXvnR6otCmLf+t9/qpgm7v6onSopeq+U8j6m2qlCrfSeqrd3Ad2fF4vFYrFYLBaLR+DGX09Tsm0bMzYnF7X23msdXcrW7H+fiRJBaWzSaq9vHouy+pvSyRrJ5ggzsGBz9Eq8aMTenZWP2QbiWqLkpSllGH9t+hjlUqgZukwGtp8YOPD8u1z3yVBEGKRN/jimT2Lsk724EoaQ9Zsm/ANjpfOFKyIgk0JlwC9frtJV8TURnQBPhEW8YBcCzKvVObQvd4PPxABzp9P1ia9yQwcI29H15juuuUKe6Po59HVjlvghILYdEbp+yGjWOwu+dQdkA+ROQ8ETXd57W+JEzzWGvm0L+JYUHH0bWFrOZP0LXc9ztZ8cOq3b8cSRGS1bdLsFF9BNaidsdafgghnuWuk0xSlD7RX0GnSPjr/2oVNriNSX2PbqYBg+flWE6yOLPfJ2jm4H5eCS8bbf58ENt+2VBxV8EzOOvk1Cg+qGb9nO9UNJ3XG6omfS3nSRfcEo2wE9xOO+vyMObAybLoxpFjtzLOeYYWcKhkR3XN87DFhZGrgQ1ll3rGwddzt+JkqlO3jJGfrNH8XY9dC7b+qSDUJd1JPbIxuuu78Gtne3KrUFNl941dm/7T6M33H4hfUnZ2VCeIKzkXDKt7qSbPUCQ29I1m1Isp10YNbx5gCXf3SWdtcfZG6+FSpP0JcNEOqthm+7Kepth2GO7o8a4GCz3vs/xE9RobzONkwQ1gegXsdos9OKf98eyZV2ufbUTNruDlvtUJJ7T76s3UqTX865WCwWi8Xi/8MfqZQq0UTnRb8AAAAASUVORK5CYII=" alt="Profile picture">
+        </div>
+        <div>
+            <h1>Hello, <%= email %></h1>
+          </div>          
+    </div>
+</body>
+</html>

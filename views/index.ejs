@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 0;
+        }
+    
+        h1 {
+            font-size: 36px;
+            color: #111;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+    
+        /* Navbar */
+        .navdiv {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+    
+        .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF0000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+    
+        .logo i {
+            color: #e40c0c;
+            font-size: 48px;
+            margin-right: 8px;
+        }
+    
+        .logo a:hover {
+            color: #cc0000;
+        }
+    
+        .div a {
+            color: #000;
+            font-size: 40px;
+        }
+    
+        /* Search Box */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 40px;
+            margin-top: 50px;
+            padding: 10px;
+            border-radius: 50px;
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    
+        .search-container input {
+            flex-grow: 1;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+    
+        .search-container input:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
+        }
+    
+        .search-container button {
+            padding: 12px 24px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+    
+        .search-container button:hover {
+            background-color: #005bb5;
+        }
+    
+        /* Video Grid */
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+    
+        .video-card {
+            width: calc(33.33% - 20px);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+    
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        .video-card img {
+            width: 100%;
+            height: auto;
+        }
+    
+        .video-card .content {
+            padding: 15px;
+        }
+    
+        .video-card h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+    
+        .video-card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+    
+        /* Loader */
+        .loader {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 18px;
+            color: #0066cc;
+            display: none;
+        }
+    
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .video-card {
+                width: calc(50% - 20px); /* 2 per row on medium screens */
+            }
+        }
+    
+        @media screen and (max-width: 480px) {
+            .video-card {
+                width: 100%; /* 1 per row on small screens */
+            }
+    
+            .logo a {
+                font-size: 18px; /* Make logo smaller on mobile */
+            }
+    
+            .search-container {
+                padding: 8px; /* Reduce padding on mobile */
+            }
+    
+            .search-container input {
+                font-size: 16px; /* Adjust input font size */
+            }
+    
+            .search-container button {
+                font-size: 14px; /* Adjust button font size */
+            }
+    
+            .navdiv {
+                flex-direction: column; /* Stack elements vertically on mobile */
+                align-items: center; /* Center align the logo and profile icon */
+            }
+    
+            .div {
+                margin-left: 0; /* Align profile icon */
+                margin-top: 10px; /* Give some space between logo and profile icon */
+            }
+    
+            .div a {
+                font-size: 30px; /* Adjust the profile icon size on mobile */
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="navdiv">
+        <div class="logo">
+            <a href="/home">
+                <i class="fa-brands fa-youtube"></i>
+                YouTube Clone
+            </a>
+        </div>
+        <div class="div">
+            <a href="/profile">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Box -->
+    <div class="search-container">
+        <form action="/search" method="get">
+            <input type="text" name="q" placeholder="Search videos..." id="search-box">
+            <button type="submit"><i class="fa-solid fa-magnifying-glass"></i> Search</button>            
+        </form>
+    </div>
+
+    <!-- Video Grid -->
+    <div class="video-grid" id="video-grid">
+        <% videos.forEach(video => { %>
+            <div class="video-card" data-id="<%= video.id %>">
+                <a href="/video/<%= video.id %>">
+                    <img src="<%= video.snippet.thumbnails.high.url %>" alt="<%= video.snippet.title %>">
+                    <div class="content">
+                        <h3><%= video.snippet.title %></h3>
+                        <p><%= video.snippet.channelTitle %></p>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">Loading more videos...</div>
+
+    <script>
+        let nextPageToken = '<%= nextPageToken || "" %>';  // This token will be sent from the server to paginate.
+        
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200 && nextPageToken) {
+                loadMoreVideos();
+            }
+        });
+
+        function loadMoreVideos() {
+            const loader = document.getElementById('loader');
+            loader.style.display = 'block';
+
+            fetch(`/load-more?v=${nextPageToken}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.videos && data.videos.length > 0) {
+                        const videoGrid = document.getElementById('video-grid');
+                        data.videos.forEach(video => {
+                            const videoCard = `
+                                <div class="video-card" data-id="${video.id}">
+                                    <a href="/video/${video.id}">
+                                        <img src="${video.snippet.thumbnails.high.url}" alt="${video.snippet.title}">
+                                        <div class="content">
+                                            <h3>${video.snippet.title}</h3>
+                                            <p>${video.snippet.channelTitle}</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            `;
+                            videoGrid.innerHTML += videoCard;
+                        });
+
+                        nextPageToken = data.nextPageToken;
+                    }
+                    loader.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching more videos:', error);
+                    loader.style.display = 'none';
+                });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= video.snippet.title %> - YouTube Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 0;
+        }
+
+        h1 {
+            margin-top: 50px;
+            font-size: 36px;
+            color: #111;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        /* Video Player */
+        .video-container {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 500px;
+            border-radius: 10px;
+        }
+
+        .video-details {
+            width: 100%;
+            max-width: 900px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-details h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .video-details p {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .video-details .statistics {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+
+        .logo a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF0000; /* YouTube-like red color */
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo a:hover {
+            color: #cc0000; /* Slightly darker red on hover */
+        }
+
+        .logo i {
+            color: #e40c0c;
+            font-size: 48px;
+            margin-right: 8px;
+        }
+
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .video-container iframe {
+                height: 350px; /* Make video smaller on medium screens */
+            }
+
+            h1 {
+                font-size: 28px; /* Reduce the title font size */
+            }
+
+            .video-details h2 {
+                font-size: 20px; /* Reduce subtitle font size */
+            }
+
+            .video-details p {
+                font-size: 14px; /* Reduce description text size */
+            }
+
+            .logo a {
+                font-size: 20px; /* Make logo smaller on medium screens */
+            }
+
+            .logo i {
+                font-size: 40px; /* Adjust logo icon size */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px; /* Adjust title size for small screens */
+                margin-top: 40px;
+                margin-bottom: 20px;
+            }
+
+            .video-container iframe {
+                height: 250px; /* Make video smaller on small screens */
+            }
+
+            .video-details h2 {
+                font-size: 18px; /* Smaller subtitle */
+            }
+
+            .video-details p {
+                font-size: 12px; /* Smaller description text */
+            }
+
+            .logo {
+                top: 10px;
+                left: 10px;
+            }
+
+            .logo a {
+                font-size: 18px; /* Further reduce font size */
+            }
+
+            .logo i {
+                font-size: 32px; /* Adjust logo icon size */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <a href="/home" style="text-decoration: none; color: #FF0000; font-weight: bold; font-size: 24px; display: flex; align-items: center;">
+            <i class="fa-brands fa-youtube" style="color: #e40c0c; font-size: 48px; margin-right: 8px;"></i>
+            YouTube Clone
+        </a>
+    </div>
+
+    <h1><%= video.snippet.title %></h1>
+
+    <!-- Video Player -->
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/<%= video.id %>" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- Video Details -->
+    <div class="video-details">
+        <h2><%= video.snippet.title %></h2>
+        <p><%= video.snippet.channelTitle %></p>
+        <div class="statistics">
+            <p>Views: <%= video.statistics.viewCount %></p>
+            <p>Likes: <%= video.statistics.likeCount %></p>
+        </div>
+    </div>
+</body>
+</html>
