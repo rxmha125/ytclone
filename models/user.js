@@ -3,12 +3,19 @@ require('dotenv').config(); // Load environment variables
 
 async function connectDB() {
   try {
-    console.log("Connecting to MongoDB with URI:", process.env.MONGODB);
-    await mongoose.connect(process.env.MONGODB, { dbName: 'rxtube' }); // Specify the database name
-    console.log('MongoDB connected to rxtube database successfully');
+    console.log("Attempting to connect to MongoDB...");
+    console.log("MongoDB URI:", process.env.MONGODB);
+
+    await mongoose.connect(process.env.MONGODB, { 
+      dbName: 'rxtube',
+      useNewUrlParser: true, 
+      useUnifiedTopology: true 
+    });
+
+    console.log('MongoDB connected successfully to the rxtube database');
   } catch (err) {
-    console.error('MongoDB connection error:', err);
-    process.exit(1); // Exit the process if connection fails
+    console.error('Error connecting to MongoDB:', err);
+    process.exit(1); // Exit the process on connection failure
   }
 }
 
@@ -23,5 +30,5 @@ const userSchema = mongoose.Schema({
   username: String,
 });
 
-// Export User model and specify 'users' as the collection name
+// Export User model
 module.exports = mongoose.model("User", userSchema, "users");
