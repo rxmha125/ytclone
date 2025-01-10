@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 require('dotenv').config(); // Load environment variables
 
-// Establish connection using the value from .env and specify the 'socialmedia' database
-console.log("Connecting to MongoDB with URI:", process.env.MONGODB);
-mongoose.connect(process.env.MONGODB, { dbName: 'rxtube' }) // Specify the database name here
-  .then(() => {
-    console.log('MongoDB connected to socialmedia database successfully');
-  })
-  .catch(err => {
+async function connectDB() {
+  try {
+    console.log("Connecting to MongoDB with URI:", process.env.MONGODB);
+    await mongoose.connect(process.env.MONGODB, { dbName: 'rxtube' }); // Specify the database name
+    console.log('MongoDB connected to rxtube database successfully');
+  } catch (err) {
     console.error('MongoDB connection error:', err);
-  });
+    process.exit(1); // Exit the process if connection fails
+  }
+}
+
+connectDB();
 
 // Define User Schema
 const userSchema = mongoose.Schema({
@@ -21,4 +24,4 @@ const userSchema = mongoose.Schema({
 });
 
 // Export User model and specify 'users' as the collection name
-module.exports = mongoose.model("User", userSchema, "users");  // 'users' will be the collection name
+module.exports = mongoose.model("User", userSchema, "users");

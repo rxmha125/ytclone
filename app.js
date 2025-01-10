@@ -2,11 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const { google } = require('googleapis');
 const app = express();
-const port = 3000;
 const userModel = require('./models/user');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const port = process.env.PORT || 3000;
 
 
 // Middleware to parse incoming requests
