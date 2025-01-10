@@ -71,41 +71,42 @@ app.get("/logout", (req, res) => {
 
 app.post('/register', async (req, res) => {
     let { email, password, name, age, username } = req.body;
-    
-    let user = await userModel.findOne({ email });
-    if (user) {
-        return res.status(500).send('User already registered');
-    }
 
-    bcrypt.genSalt(10, async (err, salt) => {
-        if (err) {
-            return res.status(500).send('Error generating salt');
+    try {
+        // Check if the user already exists
+        let user = await userModel.findOne({ email });
+        if (user) {
+            return res.status(500).send('User already registered');
         }
-        bcrypt.hash(password, salt, async (err, hash) => {
-            if (err) {
-                return res.status(500).send('Error hashing password');
-            }
 
-            const newUser = new userModel({
-                email,
-                password: hash,
-                name,
-                age,
-                username
-            });
+        // Generate a hashed password
+        const saltRounds = 10;
+        const hash = await bcrypt.hash(password, saltRounds);
 
-            // Save user to DB
-            await newUser.save();
-
-            // Create a JWT Token
-            let token = jwt.sign({ email: email, userid: newUser._id }, "shhh");
-
-            // Set the cookie
-            res.cookie('token', token);
-            res.redirect('/login');
+        // Create a new user instance
+        const newUser = new userModel({
+            email,
+            password: hash,
+            name,
+            age,
+            username
         });
-    });
+
+        // Save user to the database
+        await newUser.save();
+
+        // Create a JWT token
+        let token = jwt.sign({ email: email, userid: newUser._id }, "shhh");
+
+        // Set the token in cookies
+        res.cookie('token', token);
+        res.redirect('/login');
+    } catch (err) {
+        console.error('Error during registration:', err);
+        res.status(500).send('Internal server error');
+    }
 });
+
 
 // Middleware to check if the user is logged in
 function isLoggedin(req, res, next) {
